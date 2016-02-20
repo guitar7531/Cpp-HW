@@ -11,7 +11,7 @@ int main(int args, char *argv)
 	int n;
 	scanf("%d", &n);
 	int **a;
-	a = malloc(sizeof(int)*n);
+	a = malloc(sizeof(int*)*n);
 	for (int i = 0; i < n; i++)
 		a[i] = malloc(sizeof(int)* n);
 	for (int i = 0; i < n; i++)
