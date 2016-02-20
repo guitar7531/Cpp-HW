@@ -21,11 +21,12 @@ int main(int args, char *argv)
 	while (1){
 		scanf("%d", &x1);
 		if (x1 == 0){
-			for(int i=0;i<n;i++)
-			free(a[i]);
+			for (int i = 0; i < n; i++)
+				free(a[i]);
+			free(a);
 			return 0;
 		}
-		scanf("%d%d%d",&y1,&x2,&y2);
+		scanf("%d%d%d", &y1, &x2, &y2);
 		for (int i = y1 - 1; i <= y2 - 1; i++)
 		{
 			for (int j = x1 - 1; j <= x2 - 1; j++)
