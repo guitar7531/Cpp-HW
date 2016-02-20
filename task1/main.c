@@ -21,7 +21,8 @@ int main(int args, char *argv)
 	while (1){
 		scanf("%d", &x1);
 		if (x1 == 0){
-			free(a);
+			for(int i=0;i<n;i++)
+			free(a[i]);
 			return 0;
 		}
 		scanf("%d%d%d",&y1,&x2,&y2);
