@@ -19,7 +19,10 @@ int main(int args, char *argv)
 		a[i][j] = (i + 1)*(j + 1);
 	int x1, x2, y1, y2;
 	while (scanf("%d", &x1);){
-		if (x1 == 0)return 0;
+		if (x1 == 0){
+			return 0;
+			free(a);
+		}
 		scanf("%d%d%d",&y1,&x2,&y2);
 		for (int i = y1 - 1; i <= y2 - 1; i++)
 		{
