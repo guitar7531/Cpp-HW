@@ -87,9 +87,9 @@ void read(char* s){
 
 int main(int argc, char* argv[]){
 
-    path = argv[1];
+    path = argv[0];
     strcat(path, "base.txt");
-    ///freopen("input.txt", "r", stdin);
+    //freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
     int id;
@@ -123,7 +123,7 @@ int main(int argc, char* argv[]){
             continue;
         }
 
-        if (cmd[1] == 'r'){                                  // create 
+        if (cmd[1] == 'r'){                                     // create 
             char* phone = (char*)malloc(sizeof(char*)* 32);
             char* s = (char*)malloc(sizeof(char*)* 32);
             read(s);
@@ -133,7 +133,7 @@ int main(int argc, char* argv[]){
         }
 
         if (cmd[0] == 'f') {                             // find
-            char* s = (char*)malloc(sizeof(char*)* 2);
+            char* s = (char*)malloc(sizeof(char*)* 32);
             read(s);
             for (int i = 0; i < n; i++){
                 if (a[i].valid && (find(a[i].name, s) || find(a[i].phone, s))){
