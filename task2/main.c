@@ -88,7 +88,7 @@ void read(char* s){
 int main(int argc, char* argv[]){
 
     path = argv[0];
-    strcat(path, "base.txt");
+   // strcat(path, "base.txt");
     //freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
