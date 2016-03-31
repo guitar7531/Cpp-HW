@@ -96,7 +96,7 @@ int main(int argc, char* argv[]){
     char cmd[15];
 
     while (true){
-        scanf("%s%*c", &cmd);       
+        scanf("%s%*c", cmd);       
         if (cmd[0] == 'e'){
             rewrite();
             return 0;                            //exit
