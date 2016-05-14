@@ -16,13 +16,13 @@ note* a;
 
 void ensure_space(){
     if (size == n){
-        note* na = (note*)malloc(sizeof(note*)* (n - inval )* 2);
+        note* na = (note*)malloc(sizeof(note*)* (n - inval) * 2);
         int pos = 0;
         for (int i = 0; i < size; i++){
             if (a[i].valid)na[pos++] = a[i];
         }
         n = size - n;
-        size =(n- inval )* 2;
+        size = (n - inval) * 2;
         inval = 0;
     }
 }
@@ -35,7 +35,7 @@ void ensure_space_str(char* s){
 bool find_phone(char* s1, char* t1){
     char* s = (char*)malloc(sizeof(char*)* strlen(s1));
     int pos = 0;
-    for (int i = 0; i < strlen(s1);i++)
+    for (int i = 0; i < strlen(s1); i++)
     if (s1[i] >= '0' && s1[i] <= '9')s[pos++] = s[i];
     char* t = (char*)malloc(sizeof(char*)* strlen(t1));
     pos = 0;
@@ -91,7 +91,7 @@ void read(char* s){
     char x;
     scanf("%c", &x);
     while (x != '\n' && x != 32){
-        if (x != '(' && x != ')' && x != '-' && x != '+')s[pos++] = x;
+        s[pos++] = x;
         if (strlen(s) == pos) ensure_space_str(s);
         scanf("%c", &x);
     }
@@ -101,14 +101,14 @@ void read(char* s){
 int main(int argc, char** argv){
 
     path = argc > 1 ? argv[1] : "base.txt";
-  //  freopen("input.txt", "r", stdin);
+    //  freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
     int id;
     char cmd[15];
 
     while (true){
-        scanf("%s%*c", cmd);       
+        scanf("%s%*c", cmd);
         if (cmd[0] == 'e'){
             rewrite();
             return 0;                            //exit
