@@ -32,6 +32,19 @@ void ensure_space_str(char* s){
     s = (char*)realloc(s, sizeof(char*)* n * 2);
 }
 
+bool find_phone(char* s1, char* t1){
+    char* s = (char*)malloc(sizeof(char*)* strlen(s1));
+    int pos = 0;
+    for (int i = 0; i < strlen(s1);i++)
+    if (s1[i] >= '0' && s1[i] <= '9')s[pos++] = s[i];
+    char* t = (char*)malloc(sizeof(char*)* strlen(t1));
+    pos = 0;
+    for (int i = 0; i < strlen(t1); i++)
+    if (t1[i] >= '0' && t1[i] <= '9')t[pos++] = t[i];
+
+    return (bool)strcmp(s, t);
+}
+
 bool find(char* s1, char* t){
     char* s = (char*)malloc(sizeof(char*)* strlen(s1));
     strcpy(s, s1);
@@ -88,8 +101,8 @@ void read(char* s){
 int main(int argc, char* argv[]){
 
     path = argv[0];
-   // strcat(path, "base.txt");
-    //freopen("input.txt", "r", stdin);
+  //  strcat(path, "base.txt");
+  //  freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
     int id;
@@ -101,13 +114,13 @@ int main(int argc, char* argv[]){
             rewrite();
             return 0;                            //exit
         }
-        if (cmd[0] == 'd'){                                    // delete		
+        if (cmd[0] == 'd'){                      // delete		
             scanf("%d%*c", &id);
             del(id);
             continue;
         }
 
-        if (cmd[1] == 'h'){                 // change
+        if (cmd[1] == 'h'){                      // change
             scanf("%d", &id);
             scanf("%s%*c", cmd);
             char* s = (char*)malloc(sizeof(char*)* 2);
@@ -123,7 +136,7 @@ int main(int argc, char* argv[]){
             continue;
         }
 
-        if (cmd[1] == 'r'){                                     // create 
+        if (cmd[1] == 'r'){                      // create 
             char* phone = (char*)malloc(sizeof(char*)* 32);
             char* s = (char*)malloc(sizeof(char*)* 32);
             read(s);
@@ -132,7 +145,7 @@ int main(int argc, char* argv[]){
             continue;
         }
 
-        if (cmd[0] == 'f') {                             // find
+        if (cmd[0] == 'f') {                     // find
             char* s = (char*)malloc(sizeof(char*)* 32);
             read(s);
             for (int i = 0; i < n; i++){
