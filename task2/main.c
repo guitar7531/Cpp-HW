@@ -100,7 +100,7 @@ void read(char* s){
 
 int main(int argc, char** argv){
 
-    path = argc > 1 ? argv[1] : "base.txt";
+    path = argc > 1 ? argv[0] : "base.txt";
     //  freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
