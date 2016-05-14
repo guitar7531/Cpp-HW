@@ -98,9 +98,9 @@ void read(char* s){
     s[pos++] = '\0';
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char** argv){
 
-    path = argv[1];
+    path = argc > 1 ? argv[1] : "base.txt";
   //  freopen("input.txt", "r", stdin);
     a = (note*)malloc(sizeof(note*)* 16);
     size = 16;
