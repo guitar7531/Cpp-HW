@@ -91,7 +91,7 @@ void read(char* s){
     char x;
     scanf("%c", &x);
     while (x != '\n' && x != 32){
-        if (x != '(' && x != ')' && x != '-' && x != '+')s[pos++] = x;
+        s[pos++] = x;
         if (strlen(s) == pos) ensure_space_str(s);
         scanf("%c", &x);
     }
