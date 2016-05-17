@@ -1,3 +1,5 @@
+#ifndef TASK3_RATIONAL_H
+#define TASK3_RATIONAL_H
 
 class rational
 {
