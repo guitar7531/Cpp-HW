@@ -16,3 +16,5 @@ public:
     rational operator *(rational const &)const;
     rational operator /(rational const &)const;
 };
+
+#endif //TASK3_RATIONAL_H
