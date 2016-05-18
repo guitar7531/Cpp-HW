@@ -84,7 +84,7 @@ void add(char *name, char *phone) {
     t.phone = phone;
     t.valid = true;
     a[n++] = t;
-   // rewrite();
+    rewrite();
 }
 
 void del(int id) {
@@ -113,7 +113,7 @@ char* read() {
 
 int main(int argc, char **argv) {
 
-  //  path = argc > 1 ? argv[0] : "base.txt";
+    path = argc > 0 ? argv[0] : "base.txt";
     //  freopen("input.txt", "r", stdin);
     a = (note *) malloc(sizeof(note *) * 16);
     size = 16;
@@ -135,8 +135,8 @@ int main(int argc, char **argv) {
         if (strcmp(cmd, "change") == 0) {
             scanf("%d", &id);
             scanf("%s%*c", cmd);
-            char *s = (char *) malloc(sizeof(char *) * 2);
-            read(s);
+            char *s = NULL;
+            s = read();
             int p = 0;
             int i;
             for (i = 0; i < n; i++)
@@ -159,8 +159,8 @@ int main(int argc, char **argv) {
         }
 
         if (strcmp(cmd, "find") == 0) {
-            char *s = (char *) malloc(sizeof(char *) * 32);
-            read(s);
+            char *s = NULL;
+            s = read();
             int i;
             for (i = 0; i < n; i++) {
                 if (a[i].valid && (find(a[i].name, s) || find(a[i].phone, s))) {
