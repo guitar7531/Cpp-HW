@@ -22,9 +22,12 @@ void ensure_space() {
         for (i = 0; i < size; i++) {
             if (a[i].valid)na[pos++] = a[i];
         }
-        n = size - n;
+        n = pos - 1;
         size = (n - inval) * 2;
         inval = 0;
+        free(a);
+        a = na;
+
     }
 }
 
@@ -76,10 +79,8 @@ int cur_id = 0;
 void add(char *name, char *phone) {
     ensure_space();
     note t;
-    t.name = (char *) realloc(t.name, sizeof(char *) * strlen(name));
     t.name = name;
     t.id = cur_id++;
-    t.phone = (char *) realloc(t.phone, sizeof(char *) * strlen(name));
     t.phone = phone;
     t.valid = true;
     a[n++] = t;
