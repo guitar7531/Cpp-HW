@@ -13,7 +13,7 @@ typedef struct {
 } note;
 int size, n = 0, inval = 0;
 note *a;
-
+bool rd = false;
 void ensure_space() {
     if (size == n) {
         note *na = (note *) malloc(sizeof(note *) * (n - inval) * 2);
@@ -64,6 +64,7 @@ bool find(char *s1, char *t) {
 }
 
 void rewrite() {
+    if(rd)return;
     FILE *f;
     f = fopen(path, "w+");
     int i;
@@ -114,6 +115,7 @@ char *read(FILE *f) {
 }
 
 void init() {
+    rd = true;
     FILE *f;
     f = fopen(path, "r");
     int id;
@@ -124,6 +126,7 @@ void init() {
         add(name, phone, id);
         cur_id = id >= cur_id ? id + 1 : cur_id;
     }
+    rd = false;
 }
 
 int main(int argc, char **argv) {
@@ -132,7 +135,7 @@ int main(int argc, char **argv) {
 
     a = (note *) malloc(sizeof(note *) * 16);
     size = 16;
-    //init();
+    init();
     int id;
     char cmd[15];
     FILE *nll = NULL;
