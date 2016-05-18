@@ -132,7 +132,7 @@ int main(int argc, char **argv) {
 
     a = (note *) malloc(sizeof(note *) * 16);
     size = 16;
-    init();
+    //init();
     int id;
     char cmd[15];
     FILE *nll = NULL;
