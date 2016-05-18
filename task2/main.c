@@ -30,6 +30,7 @@ void ensure_space() {
 
 void ensure_space_str(char *s) {
     int n = strlen(s);
+    if (n == 0)n++;
     s = (char *) realloc(s, sizeof(char *) * n * 2);
 }
 
@@ -96,6 +97,7 @@ void del(int id) {
 void read(char *s) {
     int pos = 0;
     char x;
+    if (strlen(s) == pos) ensure_space_str(s);
     scanf("%c", &x);
     while (x != '\n' && x != 32) {
         s[pos++] = x;
@@ -131,7 +133,7 @@ int main(int argc, char **argv) {
             scanf("%s%*c", cmd);
             char *s = (char *) malloc(sizeof(char *) * 2);
             read(s);
-            int p;
+            int p = 0;
             int i;
             for (i = 0; i < n; i++)
                 if (a[i].valid && a[i].id == id) {
