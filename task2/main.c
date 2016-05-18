@@ -18,7 +18,8 @@ void ensure_space() {
     if (size == n) {
         note *na = (note *) malloc(sizeof(note *) * (n - inval) * 2);
         int pos = 0;
-        for (int i = 0; i < size; i++) {
+        int i;
+        for (i = 0; i < size; i++) {
             if (a[i].valid)na[pos++] = a[i];
         }
         n = size - n;
@@ -35,11 +36,12 @@ void ensure_space_str(char *s) {
 bool find_phone(char *s1, char *t1) {
     char *s = (char *) malloc(sizeof(char *) * strlen(s1));
     int pos = 0;
-    for (int i = 0; i < strlen(s1); i++)
+    int i;
+    for (i = 0; i < strlen(s1); i++)
         if (s1[i] >= '0' && s1[i] <= '9')s[pos++] = s[i];
     char *t = (char *) malloc(sizeof(char *) * strlen(t1));
     pos = 0;
-    for (int i = 0; i < strlen(t1); i++)
+    for (i = 0; i < strlen(t1); i++)
         if (t1[i] >= '0' && t1[i] <= '9')t[pos++] = t[i];
 
     return strcmp(s, t) == 0;
@@ -48,9 +50,11 @@ bool find_phone(char *s1, char *t1) {
 bool find(char *s1, char *t) {
     char *s = (char *) malloc(sizeof(char *) * strlen(s1));
     strcpy(s, s1);
-    for (int i = 0; i < strlen(s); i++)
+    int i;
+    for (i = 0; i < strlen(s); i++)
         if (s[i] >= 'a') s[i] -= ('a' - 'A');
-    for (int j = 0; j < strlen(t); j++)
+    int j;
+    for (j = 0; j < strlen(t); j++)
         if (t[j] >= 'a')t[j] -= ('a' - 'A');
     return !(strstr(s, t) == NULL);
 }
@@ -59,9 +63,10 @@ void rewrite() {
     FILE *f;
 
     f = fopen(path, "w+");
-    for (int i = 0; i < n; i++)
+    int i;
+    for (i = 0; i < n; i++)
         if (a[i].valid)
-            fprintf(f, "id %d  name %s  phone %s \n", a[i].id, a[i].name, a[i].phone);
+            fprintf(f, "id: %d | name: %s | phone: %s \n", a[i].id, a[i].name, a[i].phone);
     fclose(f);
 }
 
@@ -79,7 +84,8 @@ void add(char *name, char *phone) {
 }
 
 void del(int id) {
-    for (int i = 0; i < n; i++)
+    int i;
+    for (i = 0; i < n; i++)
         if (a[i].id == id) {
             a[i].valid = false;
             rewrite();
@@ -126,7 +132,8 @@ int main(int argc, char **argv) {
             char *s = (char *) malloc(sizeof(char *) * 2);
             read(s);
             int p;
-            for (int i = 0; i < n; i++)
+            int i;
+            for (i = 0; i < n; i++)
                 if (a[i].valid && a[i].id == id) {
                     p = i;
                     break;
@@ -137,8 +144,8 @@ int main(int argc, char **argv) {
         }
 
         if (strcmp(cmd, "create") == 0) {
-            char *phone = (char *) malloc(sizeof(char *) * 320);
-            char *s = (char *) malloc(sizeof(char *) * 320);
+            char *phone = (char *) malloc(sizeof(char *) * 32);
+            char *s = (char *) malloc(sizeof(char *) * 32);
             read(s);
             read(phone);
             add(s, phone);
@@ -148,7 +155,8 @@ int main(int argc, char **argv) {
         if (strcmp(cmd, "find") == 0) {
             char *s = (char *) malloc(sizeof(char *) * 32);
             read(s);
-            for (int i = 0; i < n; i++) {
+            int i;
+            for (i = 0; i < n; i++) {
                 if (a[i].valid && (find(a[i].name, s) || find(a[i].phone, s))) {
                     printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
                 }
