@@ -97,10 +97,10 @@ void del(int id) {
         }
 }
 
-void read(char *s) {
+char* read() {
     int pos = 0;
     char x;
-    if (strlen(s) == pos) ensure_space_str(s);
+    char *s = (char *) malloc(sizeof(char*) * 32);
     scanf("%c", &x);
     while (x != '\n' && x != 32) {
         if (x != '+' && x != '-' && x != '(' && x != ')')s[pos++] = x;
@@ -108,6 +108,7 @@ void read(char *s) {
         scanf("%c", &x);
     }
     s[pos++] = '\0';
+    return s;
 }
 
 int main(int argc, char **argv) {
@@ -149,10 +150,10 @@ int main(int argc, char **argv) {
         }
 
         if (strcmp(cmd, "create") == 0) {
-            char *phone = (char *) malloc(sizeof(char *) * 32);
-            char *s = (char *) malloc(sizeof(char *) * 32);
-            read(s);
-            read(phone);
+            char *phone = NULL;
+            char *s = NULL;
+            s = read();
+            phone = read();
             add(s, phone);
             continue;
         }
