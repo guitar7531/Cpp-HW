@@ -120,12 +120,12 @@ void init() {
     f = fopen(path, "r");
     int id;
     char *name = NULL, *phone = NULL;
-    while (fscanf(f, "%d%*c", &id) != EOF) {
+    //while (fscanf(f, "%d%*c", &id) != EOF) {
      //   name = read(f);
       //  phone = read(f);
       //  add(name, phone, id);
-        cur_id = id >= cur_id ? id + 1 : cur_id;
-    }
+    //    cur_id = id >= cur_id ? id + 1 : cur_id;
+    //}
     rd = false;
 }
 
