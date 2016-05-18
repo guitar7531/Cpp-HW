@@ -76,8 +76,10 @@ int cur_id = 0;
 void add(char *name, char *phone) {
     ensure_space();
     note t;
+    t.name = (char *) realloc(t.name, sizeof(char *) * strlen(name));
     t.name = name;
     t.id = cur_id++;
+    t.phone = (char *) realloc(t.phone, sizeof(char *) * strlen(name));
     t.phone = phone;
     t.valid = true;
     a[n++] = t;
@@ -97,7 +99,7 @@ void del(int id) {
 void read(char *s) {
     int pos = 0;
     char x;
-   // if (strlen(s) == pos) ensure_space_str(s);
+    if (strlen(s) == pos) ensure_space_str(s);
     scanf("%c", &x);
     while (x != '\n' && x != 32) {
         if (x != '+' && x != '-' && x != '(' && x != ')')s[pos++] = x;
@@ -165,6 +167,6 @@ int main(int argc, char **argv) {
             }
             continue;
         }
-        printf("Unknown command");
+        printf("Unknown command\n");
     }
 }
