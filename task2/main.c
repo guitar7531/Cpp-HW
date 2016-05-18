@@ -65,22 +65,21 @@ bool find(char *s1, char *t) {
 
 void rewrite() {
     FILE *f;
-
     f = fopen(path, "w+");
     int i;
     for (i = 0; i < n; i++)
         if (a[i].valid)
-            fprintf(f, "id: %d | name: %s | phone: %s \n", a[i].id, a[i].name, a[i].phone);
+            fprintf(f, "%d %s %s \n", a[i].id, a[i].name, a[i].phone);
     fclose(f);
 }
 
 int cur_id = 0;
 
-void add(char *name, char *phone) {
+void add(char *name, char *phone, int id) {
     ensure_space();
     note t;
     t.name = name;
-    t.id = cur_id++;
+    t.id = id++;
     t.phone = phone;
     t.valid = true;
     a[n++] = t;
@@ -97,29 +96,46 @@ void del(int id) {
         }
 }
 
-char* read() {
+char *read(FILE *f) {
+    bool file = f == NULL ? false : true;
     int pos = 0;
     char x;
-    char *s = (char *) malloc(sizeof(char*) * 32);
-    scanf("%c", &x);
+    char *s = (char *) malloc(sizeof(char *) * 32);
+    if (file)fscanf(f, "%c", &x);
+    else scanf("%c", &x);
     while (x != '\n' && x != 32) {
-        if (x != '+' && x != '-' && x != '(' && x != ')')s[pos++] = x;
+        s[pos++] = x;
         if (strlen(s) == pos) ensure_space_str(s);
-        scanf("%c", &x);
+        if (file)fscanf(f, "%c", &x);
+        else scanf("%c", &x);
     }
     s[pos++] = '\0';
     return s;
 }
 
+void init() {
+    FILE *f;
+    f = fopen(path, "r");
+    int id;
+    char *name = NULL, *phone = NULL;
+    while (fscanf(f, "%d%*c", &id) != EOF) {
+        name = read(f);
+        phone = read(f);
+        add(name, phone, id);
+        cur_id = id >= cur_id ? id + 1 : cur_id;
+    }
+}
+
 int main(int argc, char **argv) {
 
     path = argc > 1 ? argv[1] : "base.txt";
-    //  freopen("input.txt", "r", stdin);
+
     a = (note *) malloc(sizeof(note *) * 16);
     size = 16;
+    init();
     int id;
     char cmd[15];
-
+    FILE *nll = NULL;
     while (true) {
         scanf("%s%*c", cmd);
         if (strcmp(cmd, "exit") == 0) {
@@ -136,7 +152,7 @@ int main(int argc, char **argv) {
             scanf("%d", &id);
             scanf("%s%*c", cmd);
             char *s = NULL;
-            s = read();
+            s = read(nll);
             int p = 0;
             int i;
             for (i = 0; i < n; i++)
@@ -152,15 +168,15 @@ int main(int argc, char **argv) {
         if (strcmp(cmd, "create") == 0) {
             char *phone = NULL;
             char *s = NULL;
-            s = read();
-            phone = read();
-            add(s, phone);
+            s = read(nll);
+            phone = read(nll);
+            add(s, phone, cur_id++);
             continue;
         }
 
         if (strcmp(cmd, "find") == 0) {
             char *s = NULL;
-            s = read();
+            s = read(nll);
             int i;
             for (i = 0; i < n; i++) {
                 if (a[i].valid && (find(a[i].name, s) || find(a[i].phone, s))) {
