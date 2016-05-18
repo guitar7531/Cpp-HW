@@ -97,7 +97,7 @@ void del(int id) {
 void read(char *s) {
     int pos = 0;
     char x;
-    if (strlen(s) == pos) ensure_space_str(s);
+   // if (strlen(s) == pos) ensure_space_str(s);
     scanf("%c", &x);
     while (x != '\n' && x != 32) {
         if (x != '+' && x != '-' && x != '(' && x != ')')s[pos++] = x;
