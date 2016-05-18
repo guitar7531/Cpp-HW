@@ -92,7 +92,7 @@ void read(char *s) {
     char x;
     scanf("%c", &x);
     while (x != '\n' && x != 32) {
-        if (x != '(' && x != ')' && x != '-' && x != '+')s[pos++] = x;
+        s[pos++] = x;
         if (strlen(s) == pos) ensure_space_str(s);
         scanf("%c", &x);
     }
@@ -137,8 +137,8 @@ int main(int argc, char **argv) {
         }
 
         if (strcmp(cmd, "create") == 0) {
-            char *phone = (char *) malloc(sizeof(char *) * 32);
-            char *s = (char *) malloc(sizeof(char *) * 32);
+            char *phone = (char *) malloc(sizeof(char *) * 320);
+            char *s = (char *) malloc(sizeof(char *) * 320);
             read(s);
             read(phone);
             add(s, phone);
