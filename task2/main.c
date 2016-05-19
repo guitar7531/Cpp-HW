@@ -109,10 +109,10 @@ void init() {
 }
 
 char *name_conv(char *s) {
-    char* t = (char* )malloc(sizeof(char*)* strlen(s));
+    char *t = (char *) malloc(sizeof(char *) * strlen(s));
     int i, pos = 0;
     for (i = 0; i < strlen(s); i++) {
-        t[pos++]=s[i];
+        t[pos++] = s[i];
         if (t[i] >= 'a') t[i] -= ('a' - 'A');
     }
     t[pos++] = '\0';
@@ -120,7 +120,7 @@ char *name_conv(char *s) {
 }
 
 char *phone_conv(char *s) {
-    char* t = (char* )malloc(sizeof(char*)* strlen(s));
+    char *t = (char *) malloc(sizeof(char *) * strlen(s));
     int i, pos = 0;
     for (i = 0; i < strlen(s); i++)
         if (isdigit(s[i])) t[pos++] = s[i];
@@ -135,9 +135,10 @@ void find() {
     if (name)s = name_conv(s);
     else s = phone_conv(s);
     int i;
-    for(i=0; i < n; i++) 
+    for (i = 0; i < n; i++)
         if ((name && strstr(name_conv(a[i].name), s) != NULL) ||
             (!name && strcmp(phone_conv(a[i].phone), s) == 0))
+            printf("%d %s %s", a[i].id, a[i].name, a[i].phone);
     fflush(stdout);
 }
 
