@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 char *path;
 
@@ -13,7 +14,9 @@ typedef struct {
 } note;
 int size, n = 0, inval = 0;
 note *a;
+FILE *nll = NULL;
 bool rd = false;
+
 void ensure_space() {
     if (size == n) {
         note *na = (note *) malloc(sizeof(note *) * (n - inval) * 2);
@@ -51,20 +54,8 @@ bool find_phone(char *s1, char *t1) {
     return strcmp(s, t) == 0;
 }
 
-bool find(char *s1, char *t) {
-    char *s = (char *) malloc(sizeof(char *) * strlen(s1));
-    strcpy(s, s1);
-    int i;
-    for (i = 0; i < strlen(s); i++)
-        if (s[i] >= 'a') s[i] -= ('a' - 'A');
-    int j;
-    for (j = 0; j < strlen(t); j++)
-        if (t[j] >= 'a')t[j] -= ('a' - 'A');
-    return !(strstr(s, t) == NULL);
-}
-
 void rewrite() {
-    if(rd)return;
+    if (rd)return;
     FILE *f;
     f = fopen(path, "w+");
     int i;
@@ -131,6 +122,37 @@ void init() {
     rd = false;
 }
 
+char *name_conv(char *s) {
+    char* t = (char* )malloc(sizeof(char*)* strlen(s));
+    int i, pos = 0;
+    for (i = 0; i < strlen(s); i++) {
+        t[pos++]=s[i];
+        if (t[i] >= 'a') t[i] -= ('a' - 'A');
+    }
+    return t;
+}
+
+char *phone_conv(char *s) {
+    char* t = (char* )malloc(sizeof(char*)* strlen(s));
+    int i, pos = 0;
+    for (i = 0; i < strlen(s); i++)
+        if (isdigit(s[i])) t[pos++] = s[i];
+    return t;
+}
+
+void find() {
+    char *s = NULL;
+    s = read(nll);
+    bool name = isalpha(s[0]);
+    if (name)s = name_conv(s);
+    else s = phone_conv(s);
+    int i;
+    for(i=0; i < n; i++)
+        if((name && strstr(name_conv(a[i].name), s)) ||
+                (!name && strcmp(phone_conv(a[i].phone), s)))
+            printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
+}
+
 int main(int argc, char **argv) {
 
     path = argc > 1 ? argv[1] : "base.txt";
@@ -140,7 +162,6 @@ int main(int argc, char **argv) {
     init();
     int id;
     char cmd[15];
-    FILE *nll = NULL;
     while (true) {
         scanf("%s%*c", cmd);
         if (strcmp(cmd, "exit") == 0) {
@@ -180,14 +201,7 @@ int main(int argc, char **argv) {
         }
 
         if (strcmp(cmd, "find") == 0) {
-            char *s = NULL;
-            s = read(nll);
-            int i;
-            for (i = 0; i < n; i++) {
-                if (a[i].valid && (find(a[i].name, s) || find(a[i].phone, s))) {
-                    printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
-                }
-            }
+            find();
             continue;
         }
         printf("Unknown command\n");
