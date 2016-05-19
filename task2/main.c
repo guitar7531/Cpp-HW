@@ -117,7 +117,7 @@ char *read(FILE *f) {
 void init() {
     rd = true;
     FILE *f;
-    f = fopen(path, "r");
+    f = fopen(path, "at+");
     int id;
     char *name = NULL, *phone = NULL;
     while (fscanf(f, "%d", &id) != EOF) {
