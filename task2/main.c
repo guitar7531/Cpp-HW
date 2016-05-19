@@ -138,7 +138,7 @@ void find() {
     for (i = 0; i < n; i++)
         if ((name && strstr(name_conv(a[i].name), s) != NULL) ||
             (!name && strcmp(phone_conv(a[i].phone), s) == 0))
-            printf("%d %s %s", a[i].id, a[i].name, a[i].phone);
+            printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
     fflush(stdout);
 }
 
