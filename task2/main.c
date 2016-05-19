@@ -35,9 +35,13 @@ void ensure_space() {
 }
 
 void ensure_space_str(char *s) {
-    int n = strlen(s);
+    int n = strlen(s), i;
     if (n == 0)n++;
-    s = (char *) realloc(s, sizeof(char *) * n * 2);
+    char* t = (char *) malloc(sizeof(char*) * n * 2);
+    for(i=0;i < n;i++)
+        t[i] = s[i];
+    s = t;
+    free(t);
 }
 
 void rewrite() {
