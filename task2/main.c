@@ -82,7 +82,7 @@ char *read(FILE *f) {
     bool file = f == NULL ? false : true;
     int pos = 0;
     char x;
-    char *s = (char *) malloc(sizeof(char *) * 32);
+    char *s = (char *) malloc(sizeof(char *) * 3);
     if (file)fscanf(f, "%c", &x);
     else scanf("%c", &x);
     while (x != '\n' && x != 32) {
