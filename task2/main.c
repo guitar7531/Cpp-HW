@@ -35,13 +35,7 @@ void ensure_space() {
 }
 
 void ensure_space_str(char *s) {
-    int n = strlen(s), i;
-    if (n == 0)n++;
-    char* t = (char *) malloc(sizeof(char*) * n * 2);
-    for(i=0;i < n;i++)
-        t[i] = s[i];
-    s = t;
-    free(t);
+    s = realloc(s, sizeof(char *) * (strlen(s) + 1));
 }
 
 void rewrite() {
@@ -82,12 +76,12 @@ char *read(FILE *f) {
     bool file = f == NULL ? false : true;
     int pos = 0;
     char x;
-    char *s = (char *) malloc(sizeof(char *) * 3);
+    char *s = (char *) malloc(sizeof(char *) * 32);
     if (file)fscanf(f, "%c", &x);
     else scanf("%c", &x);
     while (x != '\n' && x != 32) {
         s[pos++] = x;
-        if (strlen(s) == pos) ensure_space_str(s);
+        if (strlen(s) == pos) s = realloc(s, sizeof(char *) * (strlen(s) + 1));
         if (file)fscanf(f, "%c", &x);
         else scanf("%c", &x);
     }
