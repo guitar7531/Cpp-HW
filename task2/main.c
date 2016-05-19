@@ -40,20 +40,6 @@ void ensure_space_str(char *s) {
     s = (char *) realloc(s, sizeof(char *) * n * 2);
 }
 
-bool find_phone(char *s1, char *t1) {
-    char *s = (char *) malloc(sizeof(char *) * strlen(s1));
-    int pos = 0;
-    int i;
-    for (i = 0; i < strlen(s1); i++)
-        if (s1[i] >= '0' && s1[i] <= '9')s[pos++] = s[i];
-    char *t = (char *) malloc(sizeof(char *) * strlen(t1));
-    pos = 0;
-    for (i = 0; i < strlen(t1); i++)
-        if (t1[i] >= '0' && t1[i] <= '9')t[pos++] = t[i];
-
-    return strcmp(s, t) == 0;
-}
-
 void rewrite() {
     if (rd)return;
     FILE *f;
@@ -149,10 +135,9 @@ void find() {
     if (name)s = name_conv(s);
     else s = phone_conv(s);
     int i;
-    for(i=0; i < n; i++)
-        if((name && strstr(name_conv(a[i].name), s)!= NULL) ||
-                (!name && strcmp(phone_conv(a[i].phone), s)))
-            printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
+    for(i=0; i < n; i++) 
+        if ((name && strstr(name_conv(a[i].name), s) != NULL) ||
+            (!name && strcmp(phone_conv(a[i].phone), s) == 0))
     fflush(stdout);
 }
 
