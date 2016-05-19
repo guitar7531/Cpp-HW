@@ -127,6 +127,7 @@ void init() {
         add(name, phone, id);
         cur_id = id >= cur_id ? id + 1 : cur_id;
     }
+    fclose(f);
     rd = false;
 }
 
