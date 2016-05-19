@@ -153,6 +153,7 @@ void find() {
         if((name && strstr(name_conv(a[i].name), s)!= NULL) ||
                 (!name && strcmp(phone_conv(a[i].phone), s)))
             printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
+    fflush(stdout);
 }
 
 int main(int argc, char **argv) {
