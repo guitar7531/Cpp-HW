@@ -129,6 +129,7 @@ char *name_conv(char *s) {
         t[pos++]=s[i];
         if (t[i] >= 'a') t[i] -= ('a' - 'A');
     }
+    t[pos++] = '\0';
     return t;
 }
 
@@ -137,6 +138,7 @@ char *phone_conv(char *s) {
     int i, pos = 0;
     for (i = 0; i < strlen(s); i++)
         if (isdigit(s[i])) t[pos++] = s[i];
+    t[pos++] = '\0';
     return t;
 }
 
@@ -148,7 +150,7 @@ void find() {
     else s = phone_conv(s);
     int i;
     for(i=0; i < n; i++)
-        if((name && strstr(name_conv(a[i].name), s)) ||
+        if((name && strstr(name_conv(a[i].name), s)!= NULL) ||
                 (!name && strcmp(phone_conv(a[i].phone), s)))
             printf("%d %s %s\n", a[i].id, a[i].name, a[i].phone);
 }
