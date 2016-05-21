@@ -3,8 +3,13 @@
 
 using namespace std;
 
-lazy_string::lazy_string(string &s) {
-    r = make_shared<string>(&s);
+lazy_string::operator string() {
+    return r->substr(bg, sz);
+};
+
+
+lazy_string::lazy_string(const string &s) {
+    r = make_shared<string>(s);
     sz = s.size();
     bg = 0;
 }
@@ -15,19 +20,19 @@ lazy_string::lazy_string(shared_ptr<string> p, size_t cnt, size_t b) {
     sz = cnt;
 }
 
-char lazy_string::at(size_t pos) {
+char lazy_string::at(size_t pos) const{
     return (*r)[pos + bg];
 }
 
-char lazy_string::operator[](size_t pos) {
+char lazy_string::operator[](size_t pos) const{
     return (*r)[pos + bg];
 }
 
-size_t lazy_string::size() {
+size_t lazy_string::size() const{
     return sz;
 }
 
-size_t lazy_string::lenght() {
+size_t lazy_string::lenght() const{
     return sz;
 }
 
