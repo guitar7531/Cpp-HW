@@ -35,7 +35,7 @@ lazy_string lazy_string::substr(size_t pos, size_t cnt) {
     return lazy_string(r, cnt, pos);
 }
 
-istream lazy_string::operator>>(istream &in, lazy_string &s) {
+istream &operator>>(istream &in, lazy_string &s) {
     auto nr = make_shared<string>();
     in >> *nr;
     s.r = nr;
@@ -44,7 +44,7 @@ istream lazy_string::operator>>(istream &in, lazy_string &s) {
     return in;
 }
 
-ostream lazy_string::operator<<(ostream &out,lazy_string &s) {
+ostream &operator<<(ostream &out,lazy_string &s) {
     for (int i = 0; i < s.sz; i++)
         out << (*s.r)[i + s.bg];
     return out;

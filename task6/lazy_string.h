@@ -15,12 +15,12 @@ public:
     char at(size_t);
     char operator[](size_t);
     lazy_string substr(size_t, size_t);
-    istream operator>>(istream &, lazy_string &);
-    ostream operator<<(ostream &, lazy_string &);
+    friend istream &operator>>(istream &, lazy_string &);
+    friend ostream &operator<<(ostream &, lazy_string &);
 private:
     size_t bg, sz;
     shared_ptr<string> r;
-    lazy_string(shared_ptr, size_t, size_t);
+    lazy_string(shared_ptr<string>, size_t, size_t);
 };
 
 #endif //LAZYSTRING_LAZY_STRING_H
