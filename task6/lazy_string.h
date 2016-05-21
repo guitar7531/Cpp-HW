@@ -9,11 +9,12 @@ using namespace std;
 
 class lazy_string{
 public:
-    lazy_string(string &);
-    size_t size();
-    size_t lenght();
-    char at(size_t);
-    char operator[](size_t);
+    operator string();
+    lazy_string(const string &);
+    size_t size() const;
+    size_t lenght() const;
+    char at(size_t) const;
+    char operator[](size_t) const;
     lazy_string substr(size_t, size_t);
     friend istream &operator>>(istream &, lazy_string &);
     friend ostream &operator<<(ostream &, lazy_string &);
