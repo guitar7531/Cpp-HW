@@ -8,8 +8,15 @@
 using namespace std;
 
 class lazy_string{
+    struct chr{
+    friend class lazy_string;
+        chr &operator=(char);
+    private:
+        chr(lazy_string *, size_t);
+        size_t i;
+        lazy_string *s;
+    };
 public:
-    operator string();
     lazy_string(const string &);
     size_t size() const;
     size_t lenght() const;
@@ -18,6 +25,7 @@ public:
     lazy_string substr(size_t, size_t);
     friend istream &operator>>(istream &, lazy_string &);
     friend ostream &operator<<(ostream &, lazy_string &);
+    chr operator[](size_t);
 private:
     size_t bg, sz;
     shared_ptr<string> r;
