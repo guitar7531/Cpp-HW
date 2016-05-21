@@ -3,11 +3,6 @@
 
 using namespace std;
 
-lazy_string::operator string() {
-    return r->substr(bg, sz);
-};
-
-
 lazy_string::lazy_string(const string &s) {
     r = make_shared<string>(s);
     sz = s.size();
@@ -20,19 +15,19 @@ lazy_string::lazy_string(shared_ptr<string> p, size_t cnt, size_t b) {
     sz = cnt;
 }
 
-char lazy_string::at(size_t pos) const{
+char lazy_string::at(size_t pos) const {
     return (*r)[pos + bg];
 }
 
 char lazy_string::operator[](size_t pos) const{
-    return (*r)[pos + bg];
+    return (*r)[bg + pos];
 }
 
-size_t lazy_string::size() const{
+size_t lazy_string::size() const {
     return sz;
 }
 
-size_t lazy_string::lenght() const{
+size_t lazy_string::lenght() const {
     return sz;
 }
 
@@ -49,8 +44,22 @@ istream &operator>>(istream &in, lazy_string &s) {
     return in;
 }
 
-ostream &operator<<(ostream &out,lazy_string &s) {
+ostream &operator<<(ostream &out, lazy_string &s) {
     for (int i = 0; i < s.sz; i++)
         out << (*s.r)[i + s.bg];
     return out;
+}
+
+lazy_string::chr::chr(lazy_string *str, size_t ind){
+    s = str;
+    i = ind;
+}
+
+lazy_string::chr &lazy_string::chr::operator=(char c) {
+    (*s->r)[s->bg + i] = c;
+    return *this;
+}
+
+lazy_string::chr lazy_string::operator[](size_t pos) {
+    return chr(const_cast<lazy_string *>(this), pos);
 }
