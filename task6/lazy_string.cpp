@@ -19,7 +19,7 @@ char lazy_string::at(size_t pos) const {
     return (*r)[pos + bg];
 }
 
-char lazy_string::operator[](size_t pos) const{
+char lazy_string::operator[](size_t pos) const {
     return (*r)[bg + pos];
 }
 
@@ -50,12 +50,14 @@ ostream &operator<<(ostream &out, lazy_string &s) {
     return out;
 }
 
-lazy_string::chr::chr(lazy_string *str, size_t ind){
+lazy_string::chr::chr(lazy_string *str, size_t ind) {
     s = str;
     i = ind;
 }
 
 lazy_string::chr &lazy_string::chr::operator=(char c) {
+    s->r = make_shared<string>(s->r->substr(s->bg, s->sz));
+    s->bg = 0;
     (*s->r)[s->bg + i] = c;
     return *this;
 }
